@@ -18,9 +18,11 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	-- insert files here to download
 
-	--require("plugins.colortheme-rosepine")
-	require("plugins.colortheme-fox"),
-	require("plugins.neotree"),
+	require("plugins.colortheme-rosepine"),
+	--require("plugins.colortheme-fox"),
+	--require("plugins.colortheme-tok"),
+	--require("plugins.colortheme-solar"),
+	--require("plugins.neotree"),
 	require("plugins.bufferline"),
 	require("plugins.lualine"),
 	require("plugins.treesitter"),
@@ -32,4 +34,5 @@ require("lazy").setup({
 	require("plugins.autoformat"),
 	require("plugins.greetingscreen"),
 	require("plugins.undotree"),
+	require("plugins.misc"),
 })

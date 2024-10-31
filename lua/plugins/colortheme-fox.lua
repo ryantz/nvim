@@ -4,17 +4,23 @@ return {
 	config = function()
 		require("nightfox").setup({
 			options = {
+				transparent = true,
 				styles = {
-					comments = "italic",
+					comments = "NONE", -- Value is any valid attr-list value `:help attr-list`
+					conditionals = "NONE",
+					constants = "NONE",
+					functions = "NONE",
 					keywords = "NONE",
-					types = "italic,bold",
+					numbers = "NONE",
+					operators = "NONE",
+					strings = "NONE",
+					types = "NONE",
+					variables = "NONE",
 				},
 			},
 		})
-		vim.cmd("colorscheme nightfox")
-		vim.api.nvim_set_hl(0, "DiagnosticError", { fg = "#ff0000", bg = "#1c1c1c" }) -- Customize colors
-		vim.api.nvim_set_hl(0, "DiagnosticWarn", { fg = "#ffa500", bg = "#1c1c1c" })
-		vim.api.nvim_set_hl(0, "DiagnosticInfo", { fg = "#0000ff", bg = "#1c1c1c" })
-		vim.api.nvim_set_hl(0, "DiagnosticHint", { fg = "#00ff00", bg = "#1c1c1c" })
+		vim.cmd("colorscheme terafox")
+		vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+		vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 	end,
 }

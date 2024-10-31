@@ -34,6 +34,7 @@ return {
 					"typescript",
 					"javascriptreact",
 					"typescriptreact",
+					"css",
 				},
 			}),
 			formatting.stylua,
