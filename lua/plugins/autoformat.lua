@@ -17,6 +17,9 @@ return {
 				"eslint_d", -- ts/js linter
 				"shfmt", -- Shell formatter
 				"checkmake", -- linter for Makefiles
+				"gofumpt",
+				"goimports-reviser",
+				"golines",
 			},
 			automatic_installation = true,
 		})
@@ -35,6 +38,8 @@ return {
 					"javascriptreact",
 					"typescriptreact",
 					"css",
+					"go",
+					"zig",
 				},
 			}),
 			formatting.stylua,
@@ -46,9 +51,7 @@ return {
 
 		local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 		null_ls.setup({
-			-- debug = true, -- Enable debug mode. Inspect logs with :NullLsLog.
 			sources = sources,
-			-- you can reuse a shared lspconfig on_attach callback here
 			on_attach = function(client, bufnr)
 				if client.supports_method("textDocument/formatting") then
 					vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })

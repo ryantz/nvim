@@ -28,7 +28,9 @@ return { -- Highlight, edit, and navigate code
 			"bash",
 			"tsx",
 			"css",
+			"php",
 			"html",
+			"blade",
 		},
 		-- Autoinstall languages that are not installed
 		auto_install = true,
@@ -47,4 +49,26 @@ return { -- Highlight, edit, and navigate code
 	--    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
 	--    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
 	--    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+	config = function(_, opts)
+    -- Add the Blade parser
+    local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+    parser_config.blade = {
+      install_info = {
+        url = "https://github.com/EmranMR/tree-sitter-blade",  -- Blade parser repo
+        files = { "src/parser.c" },
+        branch = "main",
+      },
+      filetype = "blade",  -- The filetype for Blade templates
+    }
+
+    -- Apply the base Treesitter configuration
+    require("nvim-treesitter.configs").setup(opts)
+
+    -- Add filetype detection for .blade.php files
+    vim.filetype.add({
+      pattern = {
+        [".*%.blade%.php"] = "blade",  -- Map .blade.php to the blade filetype
+      },
+    })
+  end,
 }
