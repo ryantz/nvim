@@ -85,3 +85,6 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagn
 
 -- No Neck Pain
 vim.keymap.set("n", "<leader>m", ":NoNeckPain<CR>", opts)
+
+-- replace all words
+vim.keymap.set("n", "<leader>r", ":%s//g<left><left>". opts);
