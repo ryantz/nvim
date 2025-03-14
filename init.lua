@@ -89,4 +89,5 @@ require("lazy").setup({
 	require("plugins.undotree"),
 	require("plugins.misc"),
 	require("plugins.devicons"),
+	require("plugins.trouble"),
 })
