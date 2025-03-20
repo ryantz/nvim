@@ -28,7 +28,7 @@ vim.cmd("highlight StatusLineGitBranch guifg=#ff0000 guibg=none gui=bold")
 vim.cmd("highlight StatusLine guifg=#ffffff")
 vim.cmd("highlight ModeMsg guifg=#ffffff")
 vim.cmd("highlight StatusLineMod guifg=#ff0000")
---vim.cmd("highlight netrwDir guifg=#00ff99")
+vim.cmd("highlight netrwDir guifg=#00ff99")
 
 -- Function to check if the file has uncommitted changes
 function Git_uncommitted()
@@ -91,3 +91,5 @@ require("lazy").setup({
 	require("plugins.devicons"),
 	require("plugins.trouble"),
 })
+
+vim.api.nvim_set_hl(0, "Visual", { bg = "#3a3a3a", blend = 80 })
