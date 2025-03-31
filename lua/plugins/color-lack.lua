@@ -19,7 +19,7 @@ return {
 
 			disable_plugin = {
 				todo_comments = false,
-				trouble = true,
+				trouble = false,
 			},
 		})
 		vim.api.nvim_set_hl(0, "Visual", { bg = "#5555ff", fg = "NONE" })

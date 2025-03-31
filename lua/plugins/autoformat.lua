@@ -28,7 +28,6 @@ return {
 			diagnostics.checkmake,
 			formatting.prettier.with({
 				filetypes = {
-					"c",
 					"html",
 					"json",
 					"yaml",
@@ -38,8 +37,6 @@ return {
 					"javascriptreact",
 					"typescriptreact",
 					"css",
-					"go",
-					"zig",
 				},
 			}),
 			formatting.stylua,

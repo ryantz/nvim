@@ -153,8 +153,6 @@ return {
 		--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 		local servers = {
 			clangd = {},
-			-- gopls = {},
-			-- pyright = {},
 			rust_analyzer = {},
 			-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
 			--
@@ -163,34 +161,14 @@ return {
 			--
 			-- But for many setups, the LSP (`tsserver`) will work just fine
 			ts_ls = {},
-			--			pylsp = {
-			--				settings = {
-			--					pylsp = {
-			--						plugins = {
-			--							pyflakes = { enabled = false },
-			--							pycodestyle = { enabled = false },
-			--							autopep8 = { enabled = false },
-			--							yapf = { enabled = false },
-			--							mccabe = { enabled = false },
-			--							pylsp_mypy = { enabled = false },
-			--							pylsp_black = { enabled = false },
-			--							pylsp_isort = { enabled = false },
-			--						},
-			--					},
-			--				},
-			--			},
 			html = { filetypes = { "html", "twig", "hbs" } },
 			stimulus_ls = {},
 			cssls = {},
-			tailwindcss = {},
-			dockerls = {},
-			sqlls = {},
 			terraformls = {},
 			jsonls = {},
 			yamlls = {},
 			ast_grep = {},
 			eslint = {},
-			phpactor = {},
 			gopls = {
 				completeUnimported = true,
 				usePlaceholders = true,

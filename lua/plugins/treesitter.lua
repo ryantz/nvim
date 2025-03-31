@@ -39,9 +39,9 @@ return { -- Highlight, edit, and navigate code
 			-- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
 			--  If you are experiencing weird indenting issues, add the language to
 			--  the list of additional_vim_regex_highlighting and disabled languages for indent.
-			additional_vim_regex_highlighting = { "ruby" },
+			additional_vim_regex_highlighting = false,
 		},
-		indent = { enable = true, disable = { "ruby" } },
+		indent = { enable = true },
 	},
 	-- There are additional nvim-treesitter modules that you can use to interact
 	-- with nvim-treesitter. You should go explore a few and see what interests you:
@@ -50,25 +50,7 @@ return { -- Highlight, edit, and navigate code
 	--    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
 	--    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 	config = function(_, opts)
-    -- Add the Blade parser
-    local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-    parser_config.blade = {
-      install_info = {
-        url = "https://github.com/EmranMR/tree-sitter-blade",  -- Blade parser repo
-        files = { "src/parser.c" },
-        branch = "main",
-      },
-      filetype = "blade",  -- The filetype for Blade templates
-    }
-
-    -- Apply the base Treesitter configuration
-    require("nvim-treesitter.configs").setup(opts)
-
-    -- Add filetype detection for .blade.php files
-    vim.filetype.add({
-      pattern = {
-        [".*%.blade%.php"] = "blade",  -- Map .blade.php to the blade filetype
-      },
-    })
-  end,
+		-- Apply the base Treesitter configuration
+		require("nvim-treesitter.configs").setup(opts)
+	end,
 }
