@@ -45,7 +45,7 @@ require("lazy").setup({
 
 vim.cmd("highlight StatusLineFileType guibg=none")
 vim.cmd("highlight StatusLineGitUser guifg=#F1502F")
-vim.cmd("highlight StatusLineGitBranch guifg=#ffffff")
+vim.cmd("highlight StatusLineGitBranch guifg=#0ff099")
 vim.cmd("highlight StatusLine guifg=#ffffff guibg=#000000")
 vim.cmd("highlight ModeMsg guifg=#ffffff")
 vim.cmd("highlight StatusLineMod guifg=#000000")
@@ -82,6 +82,8 @@ function FileModified()
 	end
 end
 
+vim.api.nvim_set_hl(0, "Visual", { bg = "#3a3a3a", fg = "#ECD98A" })
+
 -- Your existing statusline configuration, updated to use the new icon function
 vim.opt.statusline = "%#StatusLine#"
 	.. "    %F                                " -- File name
@@ -105,7 +107,7 @@ vim.opt.statusline = "%#StatusLine#"
 	.. "%#StatusLineGitBranch#"
 	.. " %{FugitiveHead()}" -- Git branch (Fugitive)
 	.. "%#StatusLine#"
-	.. "  line %l/%L " -- Percentage through the file
+	.. "  (Line %l/%L) " -- Percentage through the file
 
 -- Preserve status line colors after changing background
 vim.api.nvim_create_autocmd("ColorScheme", {
@@ -113,10 +115,10 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 		-- Re-apply your custom highlights after colorscheme change
 		vim.cmd("highlight StatusLineFileType guibg=none")
 		vim.cmd("highlight StatusLineGitUser guifg=#F1502F")
-		vim.cmd("highlight StatusLineGitBranch guifg=#ffffff")
+		vim.cmd("highlight StatusLineGitBranch guifg=#0ff099")
 		vim.cmd("highlight StatusLine guifg=#ffffff guibg=#000000")
 		vim.cmd("highlight ModeMsg guifg=#ffffff")
-		vim.cmd("highlight StatusLineMod guifg=#ff0000")
+		vim.cmd("highlight StatusLineMod guifg=#000000")
 		vim.cmd("highlight netrwDir guifg=#ffaa11")
 
 		-- Re-apply the function to check for uncommitted changes
@@ -124,7 +126,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 			"highlight StatusLineUncommitted guifg="
 				.. (vim.fn.system("git status --porcelain " .. vim.fn.expand("%")) ~= "" and "#ff0000" or "#00ff00")
 		)
-		--vim.api.nvim_set_hl(0, "Visual", { bg = "#3a3a3a", fg = "#ECD98A" })
+		vim.api.nvim_set_hl(0, "Visual", { bg = "#3a3a3a", fg = "#ECD98A" })
 	end,
 })
 
