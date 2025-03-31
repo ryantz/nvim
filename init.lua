@@ -44,11 +44,11 @@ require("lazy").setup({
 })
 
 vim.cmd("highlight StatusLineFileType guibg=none")
-vim.cmd("highlight StatusLineGitUser guifg=#F1502F gui=bold")
-vim.cmd("highlight StatusLineGitBranch guifg=#ff0000 guibg=none gui=bold")
-vim.cmd("highlight StatusLine guifg=#ffffff guibg=#2c2c2c")
+vim.cmd("highlight StatusLineGitUser guifg=#F1502F")
+vim.cmd("highlight StatusLineGitBranch guifg=#ffffff")
+vim.cmd("highlight StatusLine guifg=#ffffff guibg=#000000")
 vim.cmd("highlight ModeMsg guifg=#ffffff")
-vim.cmd("highlight StatusLineMod guifg=#ff0000")
+vim.cmd("highlight StatusLineMod guifg=#000000")
 vim.cmd("highlight netrwDir guifg=#ffaa11")
 
 -- Function to check if the file has uncommitted changes
@@ -56,10 +56,10 @@ function Git_uncommitted()
 	local file = vim.fn.expand("%")
 	if vim.fn.system("git status --porcelain " .. file) ~= "" then
 		vim.cmd("highlight StatusLineUncommitted guifg=#ff0000") -- Red color for uncommitted files
-		return "  " -- Red dot if uncommitted
+		return " Not Commited " -- Red dot if uncommitted
 	end
 	vim.cmd("highlight StatusLineUncommitted guifg=#00ff00") -- Red color for uncommitted files
-	return "  " -- Green dot if committed
+	return " Commited " -- Green dot if committed
 end
 
 function GitUser()
@@ -72,135 +72,49 @@ function GitUser()
 	return "No Git User"
 end
 
--- Comprehensive Nerd Font file type icon mapping
-local file_type_icons = {
-	-- Programming Languages
-	python = "",
-	lua = "󰢱",
-	javascript = "",
-	typescript = "󰛦",
-	rust = "󱘗",
-	go = "󰟓",
-	cpp = "",
-	c = "",
-	java = "",
-	php = "󰌟",
-	-- Markup and Styling
-	html = "󰌝 ",
-	css = "",
-	json = "󰘦",
-	yaml = "",
-	toml = "",
-	markdown = "󰽛",
-	xml = "󰗀",
-
-	-- Configuration and Scripting
-	sh = "󱆃 ",
-	bash = "󱆃 ",
-	zsh = "󱆃 ",
-	vim = "",
-	git = "󰊢",
-
-	-- Frameworks and Libraries
-	react = "󰜈",
-	vue = "󰡄",
-	angular = "",
-	nodejs = "󰎙",
-
-	-- Data and Databases
-	sql = "",
-	csv = "󰓫",
-
-	-- Miscellaneous
-	text = "",
-	log = " ",
-	conf = "",
-
-	-- Fallback
-	default = " ",
-}
-
--- Function to get Nerd Font icon for file type
-function GetFileTypeIcon(filetype)
-	-- Handle special cases or mappings
-	local type_mappings = {
-		[""] = "default", -- Empty filetype
-		["javascript.jsx"] = "react",
-		["typescript.tsx"] = "react",
-	}
-
-	-- Normalize filetype
-	filetype = filetype:lower()
-
-	-- Check mapped types first
-	if type_mappings[filetype] then
-		filetype = type_mappings[filetype]
+function FileModified()
+	if vim.bo.modified then
+		vim.cmd("highlight StatusLineMod guifg=#ff0000") -- Red color for uncommitted files
+		return " Not Saved "
+	else
+		vim.cmd("highlight StatusLineMod guifg=#00ff00") -- Red color for uncommitted files
+		return " Saved "
 	end
-
-	-- Return icon, defaulting to generic icon if not found
-	return file_type_icons[filetype] or file_type_icons.default
 end
 
 -- Your existing statusline configuration, updated to use the new icon function
 vim.opt.statusline = "%#StatusLine#"
-	.. "  󰶞  %f " -- File name
+	.. "  %F                                " -- File name
 	.. "%#StatusLineFileType#"
-	.. "%y %{luaeval('GetFileTypeIcon(vim.bo.filetype)')} " -- File type icon and type
 	.. "%#StatusLine#"
 	.. "%#StatusLineMod#"
-	.. " %m " -- Modified flag
+	.. " %{luaeval('FileModified()')} " -- Modified flag
 	.. "%#StatusLine#"
-	.. "%r " -- Readonly flag
-	.. "%=" -- Right align
-	.. "%#StatusLineGitUser#"
-	.. "  %{luaeval('GitUser()')} "
-	.. "%#StatusLine#"
-	.. "| "
-	.. "%#StatusLineGitBranch#"
-	.. " %{FugitiveHead()}" -- Git branch (Fugitive)
-	.. "%#StatusLine#"
-	.. " "
+	.. " <"
 	.. "%#StatusLineUncommitted#"
 	.. "%{luaeval('Git_uncommitted()')}" -- Correct Lua function call
 	.. "%#StatusLine#"
-	.. "| %l:%c | " -- Cursor position: line,col
-	.. "%p%%  " -- Percentage through the file
-
--- Updated status line
---vim.opt.statusline = "%#StatusLine#"
---	.. "   %f " -- File name
---	.. "%#StatusLineFileType#"
---	.. "%y " -- File type
---	.. "%#StatusLine#"
---	.. "%#StatusLineMod#"
---	.. " %m " -- Modified flag
---	.. "%#StatusLine#"
---	.. "%r " -- Readonly flag
---	.. "%=" -- Right align
---	.. "%#StatusLineGitUser#"
---	.. "  %{luaeval('GitUser()')} "
---	.. "%#StatusLine#"
---	.. "| git:("
---	.. "%#StatusLineGitBranch#"
---	.. " %{FugitiveHead()}" -- Git branch (Fugitive)
---	.. "%#StatusLine#"
---	.. ")"
---	.. "%#StatusLineUncommitted#"
---	.. "%{luaeval('Git_uncommitted()')}" -- Correct Lua function call
---	.. "%#StatusLine#"
---	.. "| %l:%c | " -- Cursor position: line,col
---	.. "%p%%  " -- Percentage through the file
-
---vim.api.nvim_set_hl(0, "Visual", { bg = "#3a3a3a", fg = "#ECD98A" })
+	.. "> "
+	.. "%#StatusLine#"
+	.. "%s " -- Readonly flag
+	.. "%=" -- Right align
+	.. "%Y  " -- File type icon and type
+	.. "%#StatusLineGitUser#"
+	.. " %{luaeval('GitUser()')}"
+	.. "%#StatusLine#"
+	.. "%#StatusLineGitBranch#"
+	.. " %{FugitiveHead()}" -- Git branch (Fugitive)
+	.. "%#StatusLine#"
+	.. "  line %l/%L " -- Percentage through the file
 
 -- Preserve status line colors after changing background
 vim.api.nvim_create_autocmd("ColorScheme", {
 	callback = function()
 		-- Re-apply your custom highlights after colorscheme change
-		vim.cmd("highlight StatusLineFileType guibg=none gui=bold")
-		vim.cmd("highlight StatusLineGitUser guifg=#F1502F gui=bold")
-		vim.cmd("highlight StatusLineGitBranch guifg=#ff0000 guibg=none gui=bold")
-		vim.cmd("highlight StatusLine guifg=#ffffff guibg=#2c2c2c")
+		vim.cmd("highlight StatusLineFileType guibg=none")
+		vim.cmd("highlight StatusLineGitUser guifg=#F1502F")
+		vim.cmd("highlight StatusLineGitBranch guifg=#ffffff")
+		vim.cmd("highlight StatusLine guifg=#ffffff guibg=#000000")
 		vim.cmd("highlight ModeMsg guifg=#ffffff")
 		vim.cmd("highlight StatusLineMod guifg=#ff0000")
 		vim.cmd("highlight netrwDir guifg=#ffaa11")
