@@ -84,7 +84,7 @@ end
 
 -- Your existing statusline configuration, updated to use the new icon function
 vim.opt.statusline = "%#StatusLine#"
-	.. "  %F                                " -- File name
+	.. "    %F                                " -- File name
 	.. "%#StatusLineFileType#"
 	.. "%#StatusLine#"
 	.. "%#StatusLineMod#"
