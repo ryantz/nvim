@@ -27,8 +27,9 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	--require("plugins.color-lack"),
+	--require("plugins.color-gruv"),
+	require("plugins.color-zen"),
 	--require("plugins.color-far"),
-	require("plugins.color-falcon"),
 	require("plugins.treesitter"),
 	require("plugins.telescope"),
 	require("plugins.lsp"),
@@ -43,13 +44,13 @@ require("lazy").setup({
 	require("plugins.rendermd"),
 })
 
+vim.cmd("highlight StatusLine gui=NONE guifg=#ffffff guibg=#1c1c1c")
 vim.cmd("highlight StatusLineFileType guibg=none")
 vim.cmd("highlight StatusLineGitUser guifg=#F1502F")
 vim.cmd("highlight StatusLineGitBranch guifg=#0ff099")
-vim.cmd("highlight StatusLine guifg=#ffffff guibg=#000000")
 vim.cmd("highlight ModeMsg guifg=#ffffff")
 vim.cmd("highlight StatusLineMod guifg=#000000")
-vim.cmd("highlight netrwDir guifg=#ffaa11")
+--vim.cmd("highlight netrwDir guifg=#ffaa11")
 
 -- Function to check if the file has uncommitted changes
 function Git_uncommitted()

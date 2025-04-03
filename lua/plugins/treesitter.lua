@@ -5,18 +5,16 @@ return { -- Highlight, edit, and navigate code
 	-- [[ Configure Treesitter ]] See `:help nvim-treesitter`
 	opts = {
 		ensure_installed = {
+			"rust",
 			"lua",
 			"python",
 			"javascript",
 			"typescript",
 			"vimdoc",
 			"vim",
-			"regex",
 			"sql",
-			"dockerfile",
 			"toml",
 			"json",
-			"java",
 			"go",
 			"gitignore",
 			"graphql",
@@ -26,11 +24,8 @@ return { -- Highlight, edit, and navigate code
 			"markdown",
 			"markdown_inline",
 			"bash",
-			"tsx",
 			"css",
-			"php",
 			"html",
-			"blade",
 		},
 		-- Autoinstall languages that are not installed
 		auto_install = true,
