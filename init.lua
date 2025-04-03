@@ -27,7 +27,6 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	--require("plugins.color-lack"),
-	--require("plugins.color-gruv"),
 	require("plugins.color-zen"),
 	--require("plugins.color-far"),
 	require("plugins.treesitter"),
