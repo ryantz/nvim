@@ -41,6 +41,20 @@ vim.opt.iskeyword:append("-") -- Hyphenated words recognized by searches (defaul
 vim.opt.formatoptions:remove({ "c", "r", "o" }) -- Don't insert the current comment leader automatically for auto-wrapping comments using 'textwidth', hitting <Enter> in insert mode, or hitting 'o' or 'O' in normal mode. (default: 'croql')
 vim.opt.runtimepath:remove("/usr/share/vim/vimfiles") -- Separate Vim plugins from Neovim in case Vim still in use (default: includes this path if Vim is installed)
 --vim.opt.guicursor = "n-v-c:block"
+vim.opt.guicursor = {
+	"n-v-c:block-CursorNormal",
+	"i-ci-ve:block-CursorInsert",
+	"r-cr:block-CursorReplace",
+	"v:block-CursorVisual",
+}
+
+vim.cmd([[
+  highlight CursorNormal guifg=NONE guibg=#ff0000
+  highlight CursorInsert guifg=NONE guibg=#000000
+  highlight CursorVisual guifg=NONE guibg=#ff3fff
+  highlight CursorReplace guifg=NONE guibg=#00aaff
+]])
+
 vim.opt.list = true
 vim.opt.listchars = {
 	--space = "·", -- Middle dot for spaces

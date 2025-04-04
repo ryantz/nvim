@@ -43,13 +43,15 @@ require("lazy").setup({
 	require("plugins.rendermd"),
 })
 
+vim.api.nvim_set_hl(0, "ModeMsg", { fg = "white", bg = "#06402B" })
+
 vim.cmd("highlight StatusLine gui=NONE guifg=#ffffff guibg=#1c1c1c")
 vim.cmd("highlight StatusLineFileType guibg=none")
 vim.cmd("highlight StatusLineGitUser guifg=#F1502F")
 vim.cmd("highlight StatusLineGitBranch guifg=#0ff099")
 vim.cmd("highlight ModeMsg guifg=#ffffff")
 vim.cmd("highlight StatusLineMod guifg=#000000")
---vim.cmd("highlight netrwDir guifg=#ffaa11")
+vim.cmd("highlight netrwDir guifg=#06402b")
 
 -- Function to check if the file has uncommitted changes
 function Git_uncommitted()

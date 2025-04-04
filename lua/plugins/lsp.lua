@@ -39,6 +39,13 @@ return {
 		--
 		-- If you're wondering about lsp vs treesitter, you can check out the wonderfully
 		-- and elegantly composed help section, `:help lsp-vs-treesitter`
+		vim.diagnostic.config({
+			virtual_text = true,
+			signs = true,
+			underline = true,
+			update_in_insert = true, --false to not update error when in insert
+			severity_sort = false,
+		})
 
 		--  This function gets run when an LSP attaches to a particular buffer.
 		--    That is to say, every time a new file is opened that is associated with
