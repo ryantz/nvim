@@ -20,6 +20,7 @@ return {
 				"gofumpt",
 				"goimports-reviser",
 				"golines",
+				"clang-fmt",
 			},
 			automatic_installation = true,
 		})

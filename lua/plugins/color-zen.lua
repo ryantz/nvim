@@ -5,6 +5,6 @@ return {
 	priority = 1000,
 	config = function()
 		vim.opt.background = "light"
-		vim.cmd("colorscheme vimbones")
+		vim.cmd("colorscheme zenbones")
 	end,
 }
